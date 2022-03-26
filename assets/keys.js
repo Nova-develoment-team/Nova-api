@@ -2,8 +2,8 @@
 // const db = new Database();
 module.exports = {
   keys: [
-    "hqwdygu@YjnsqY&@E",
-    "hhbas12yg12jqwskm"
+    "key1",
+    "ke2"
   ]
 }
 // yall have leaked my API keys, this means war.
