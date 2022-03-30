@@ -5,7 +5,7 @@ module.exports = {
   name: "test/lewdbomb",
   run: async(req, res) => {
     let {key} = req.query;
-    if (key !== process.env.faizen_key) return res.json({ error: "Owner only endpoint!" })
+    if (key !== 7122011) return res.json({ error: "Owner only endpoint!" })
     var {limit} = req.query;
     if(isNaN(limit)) return res.json({ error: "Not a number" })
     const image = await akaneko.lewdBomb(limit)

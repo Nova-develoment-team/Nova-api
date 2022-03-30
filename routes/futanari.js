@@ -7,7 +7,7 @@ module.exports = {
   run: async(req,res) => {
     var {key} = req.query;
     if(!keysList.includes(key) || !key) {
-      return res.json({ error: require("../assets/utils.json").KeyError })
+      return res.json({ error: require("./assets/utils.json").KeyError })
     }
     var futa = await neko.nsfw.futanari()
     res.json({ url: futa.url })

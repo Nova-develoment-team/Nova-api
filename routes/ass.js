@@ -6,7 +6,7 @@ module.exports = {
   run: async(req, res) => {
     let { key } = req.query;
     if (!key || !keysList.includes(key)) {
-      return res.json({ error: "Access denied! No API key provided or invalid API key."})
+      return res.json({ error: require("./assets/utils.json").KeyError})
     };
     var image = await akaneko.nsfw.ass()
     res.json({ 
