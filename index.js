@@ -8,6 +8,7 @@ const db = require('quick.db')
 const keysList = require('./assets/keys.js').keys
 const { Canvas } = require('canvas-constructor/cairo')
 const canvas = require('canvas')
+const chalk = require('chalk')
 
 console.log('Nsfw endpoints loaded')
 console.log('Fun endpoints loaded')
@@ -29,6 +30,9 @@ if (!key || !keysList.includes(key)) return res.json({ error: require("./assets/
     
     rand_deeznuts = deeznuts[Math.floor(Math.random() * deeznuts.length)]
     res.json({ response: rand_deeznuts })
+
+    db.add("reqs_fun",1)
+    db.add("reqs_8ball",1)
 });
 
 app.get('/fun/gay', (req, res) => {   
@@ -39,6 +43,9 @@ if (!key || !keysList.includes(key)) return res.json({ error: require("./assets/
                                         
     rand_gay = gay[Math.floor(Math.random() * gay.length)]
     res.json({ response: rand_gay })
+
+        db.add("reqs_fun",1)
+    db.add("reqs_gay",1)
 });
 
 app.get('/fun/joke', (req, res) => {       
@@ -49,6 +56,9 @@ if (!key || !keysList.includes(key)) return res.json({ error: require("./assets/
   
     rand_joke = joke[Math.floor(Math.random() * joke.length)]
     res.json({ response: rand_joke })
+
+    db.add("reqs_fun",1)
+    db.add("reqs_joke",1)
 });
 
 
@@ -60,6 +70,9 @@ if (!key || !keysList.includes(key)) return res.json({ error: require("./assets/
   
     rand_num = num[Math.floor(Math.random() * num.length)]
     res.json({ response: rand_num })
+
+    db.add("reqs_misc",1)
+    db.add("reqs_num",1)
 });
 
 app.get('/fun/twiter/:feed', async (req, res) => {
@@ -80,6 +93,8 @@ if (!key || !keysList.includes(key)) return res.json({ error: require("./assets/
     res.set({'Content-Type': 'image/png'})//setting content type as png image!
     res.send(image)//sending the image!
 
+    db.add("reqs_fun",1)
+    db.add("reqs_twiter",1)
 });
 
 app.get('/', (req, res) => {
@@ -90,16 +105,18 @@ app.get('/*',(req,res)=>{
 res.send({error:"Hmmm invald endpoint"})
 })
 
+const static = chalk.grey// Staticstics and lines color
+
+
 app.listen(PORT, () => {
-  console.log("+-------------- [ Staticstics ] --------------+")
-  console.log("| NodeJS: ${nodejsv}                          |")
-  console.log("| ------------------------------------------- |")
-  console.log("| Successfully loaded all elements and codes  |")
-  console.log("| ------------------------------------------- |")
-  console.log("| Nova api is up! ✅                           |")
-  console.log("| ------------------------------------------- |");
-  console.log("| Connected to - https://api.nova-bot.tk ✅    |");
-  console.log("| ------------------------------------------- |");
-  console.log("| Keys '' and '' loaded         |");
-  console.log("+---------------------------------------------+");
+  console.log(static("+-------------- [ Staticstics ] --------------+"));
+  console.log(static("| ------------------------------------------- |"));
+  console.log(static("| Successfully loaded all elements and codes  |"));
+  console.log(static("| ------------------------------------------- |"));
+  console.log(static("| Nova api is up! ✅                           |"));
+  console.log(static("| ------------------------------------------- |"));
+  console.log(static("| Connected to - https://api.nova-bot.tk ✅    |"));
+  console.log(static("| ------------------------------------------- |"));
+  console.log(static("| Keys '' and '' loaded         |"));
+  console.log(static("+---------------------------------------------+"));
 })
