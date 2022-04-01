@@ -13,7 +13,7 @@
     "nodemon": "^2.0.15",
     "quick.db": "^7.1.3"
   },
-  "name": "Nova api",
+  "name": "Nova-api",
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
