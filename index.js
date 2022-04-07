@@ -8,11 +8,14 @@ const db = require('quick.db')
 const keysList = require('./assets/keys.js').keys
 const { Canvas } = require('canvas-constructor/cairo')
 const canvas = require('canvas')
-const chalk = require('chalk')
 
-console.log('Nsfw endpoints loaded')
-console.log('Fun endpoints loaded')
-console.log('misc endpoints loaded')
+console.log('Home page loaded')
+console.log('8ball api loaded')
+console.log('Number gen api loaded')
+console.log('gay api loaded')
+console.log('joke api loaded')
+console.log('twiter api loaded')
+
 const max = 100
 
 const app = express();
@@ -26,39 +29,30 @@ app.use(bodyParser.json());
 app.get('/fun/8ball', (req, res) => {      
 console.log('Someone put an invalid key in the 8ball api')
 const {key} = req.query;
-if (!key || !keysList.includes(key)) return res.json({ error: require("./assets/utils.json").KeyError })
+if (!key || !keysList.includes(key)) return res.json({ error: "invalid key" })
     
     rand_deeznuts = deeznuts[Math.floor(Math.random() * deeznuts.length)]
     res.json({ response: rand_deeznuts })
-
-    db.add("reqs_fun",1)
-    db.add("reqs_8ball",1)
 });
 
 app.get('/fun/gay', (req, res) => {   
 console.log('Someone put an invalid key in the gay api')    
     
 const {key} = req.query;
-if (!key || !keysList.includes(key)) return res.json({ error: require("./assets/utils.json").KeyError })
+if (!key || !keysList.includes(key)) return res.json({ error: "invalid key" })
                                         
     rand_gay = gay[Math.floor(Math.random() * gay.length)]
     res.json({ response: rand_gay })
-
-        db.add("reqs_fun",1)
-    db.add("reqs_gay",1)
 });
 
 app.get('/fun/joke', (req, res) => {       
 console.log('Someone put an invalid key in the joke api')
     
 const {key} = req.query;
-if (!key || !keysList.includes(key)) return res.json({ error: require("./assets/utils.json").KeyError })
+if (!key || !keysList.includes(key)) return res.json({ error: "invalid key" })
   
     rand_joke = joke[Math.floor(Math.random() * joke.length)]
     res.json({ response: rand_joke })
-
-    db.add("reqs_fun",1)
-    db.add("reqs_joke",1)
 });
 
 
@@ -66,13 +60,10 @@ app.get('/misc/num', (req, res) => {
 console.log('Someone put an invalid key in the num api')
     
 const {key} = req.query;
-if (!key || !keysList.includes(key)) return res.json({ error: require("./assets/utils.json").KeyError })
+if (!key || !keysList.includes(key)) return res.json({ error: "invalid key" })
   
     rand_num = num[Math.floor(Math.random() * num.length)]
     res.json({ response: rand_num })
-
-    db.add("reqs_misc",1)
-    db.add("reqs_num",1)
 });
 
 app.get('/fun/twiter/:feed', async (req, res) => {
@@ -80,7 +71,7 @@ app.get('/fun/twiter/:feed', async (req, res) => {
     console.log('Someone put an invalid key in the twiter api')
     
 const {key} = req.query;
-if (!key || !keysList.includes(key)) return res.json({ error: require("./assets/utils.json").KeyError })
+if (!key || !keysList.includes(key)) return res.json({ error: "invalid key" })
     
     const img = await canvas.loadImage('https://teckspace.files.wordpress.com/2011/08/twitter1.jpg')
 
@@ -93,8 +84,6 @@ if (!key || !keysList.includes(key)) return res.json({ error: require("./assets/
     res.set({'Content-Type': 'image/png'})//setting content type as png image!
     res.send(image)//sending the image!
 
-    db.add("reqs_fun",1)
-    db.add("reqs_twiter",1)
 });
 
 app.get('/', (req, res) => {
@@ -105,18 +94,14 @@ app.get('/*',(req,res)=>{
 res.send({error:"Hmmm invald endpoint"})
 })
 
-const static = chalk.grey// Staticstics and lines color
-
-
 app.listen(PORT, () => {
-  console.log(static("+-------------- [ Staticstics ] --------------+"));
-  console.log(static("| ------------------------------------------- |"));
-  console.log(static("| Successfully loaded all elements and codes  |"));
-  console.log(static("| ------------------------------------------- |"));
-  console.log(static("| Nova api is up! ✅                           |"));
-  console.log(static("| ------------------------------------------- |"));
-  console.log(static("| Connected to - https://api.nova-bot.tk ✅    |"));
-  console.log(static("| ------------------------------------------- |"));
-  console.log(static("| Keys '' and '' loaded         |"));
-  console.log(static("+---------------------------------------------+"));
+  console.log("--------------- [ Staticstics ] ---------------")
+  console.log("[ NodeJS: ${nodejsv}                          ]")
+  console.log("[ ------------------------------------------- ]")
+  console.log("[ Successfully loaded all elements and codes  ]")
+  console.log("[ ------------------------------------------- ]")
+  console.log("[ Nova api is up! ✅                           ]")
+  console.log("[ ------------------------------------------- ]");
+  console.log("[ Connected to - https://api.nova-bot.tk ✅    ]");
+  console.log("-----------------------------------------------");
 })
